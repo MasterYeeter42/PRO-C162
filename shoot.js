@@ -66,13 +66,14 @@ AFRAME.registerComponent("bullets", {
           elementHit.getAttribute("position")
         );
 
-      element.body.applyImpulse(impulse, worldPoint)
+        element.body.applyImpulse(impulse, worldPoint);
 
         //remove event listener
-        
+        element.removeEventListener("collide", this.shoot);
         
         //remove the bullets from the scene
-      
+        var scene = document.querySelector("#scene");
+        scene.removeChild(element);
     }
   },
 });
