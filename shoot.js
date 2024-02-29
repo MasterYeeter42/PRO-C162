@@ -48,18 +48,25 @@ AFRAME.registerComponent("bullets", {
     console.log(e.detail.body.el);
 
     //bullet element
-
+    var element =e.detail.target.el;
 
     //element which is hit
- 
+    var elementHit = e.detail.body.el;
 
-    if (elementHit.id.includes("box")) 
-      {
+    if (elementHit.id.includes("box")) {
         //set material attribute
-        
+        elementHit.setAttribute("material", {
+          opacity: 1,
+          transparent: true,
+        });
 
         //impulse and point vector
-        
+        var impulse = new CANNON.Vec3(-2, 2, 1);
+        var worldPoint = new CANNON.Vec3().copy(
+          elementHit.getAttribute("position")
+        );
+
+      element.body.applyImpulse(impulse, worldPoint)
 
         //remove event listener
         
